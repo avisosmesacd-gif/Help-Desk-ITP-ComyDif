@@ -11,7 +11,7 @@ El sistema opera como una aplicación web de página única (Single Page Applica
 1. **Portal Público de Solicitantes:**
    - Catálogo interactivo de 7 categorías de servicios de comunicación y difusión.
    - Formulario reactivo con especificaciones técnicas dinámicas según el servicio seleccionado.
-   - Selector interactivo de fecha y hora institucional (reloj análogo-digital) para eventos presenciales.
+   - Selector interactivo de fecha y hora institucional para eventos presenciales.
    - Generación atómica de número de folio oficial (`SRV-XXX`) respaldado por secuencias de base de datos.
    - Módulo de consulta de estatus en tiempo real mediante folio, con línea de tiempo de progreso, asignación de responsables y notas de seguimiento.
    - Manual interactivo paso a paso para usuarios solicitantes.
@@ -24,7 +24,7 @@ El sistema opera como una aplicación web de página única (Single Page Applica
    - Notificaciones en tiempo real (campana con contador reactivo) ante nuevas solicitudes vía WebSockets.
    - Asignación de colaboradores responsables, fechas límite y notas internas de avance.
    - Módulo de denegación con registro obligatorio de motivo justificado.
-   - Generador en cliente de **Reportes Ejecutivos Oficiales en PDF** (mensuales o semestrales) con diseño institucional y estadísticas.
+   - Generador en cliente de **Reportes Oficiales en PDF** (mensuales o semestrales) con diseño institucional y estadísticas.
    - Manual operativo detallado del Panel Interno.
 
 ---
