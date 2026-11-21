@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Mesa ITP">
-  <!-- política de seguridad de contenido (csp) para restringir orígenes permitidos -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://api.fontshare.com; font-src 'self' https://fonts.gstatic.com https://api.fontshare.com https://cdn.fontshare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://script.google.com https://script.googleusercontent.com https://cdn.jsdelivr.net https://unpkg.com; base-uri 'self'; form-action 'self';">
+  <!-- política de seguridad de contenido (csp) estricta: sin unsafe-inline en scripts y sin unpkg -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://api.fontshare.com; font-src 'self' https://fonts.gstatic.com https://api.fontshare.com https://cdn.fontshare.com data:; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://script.google.com https://script.googleusercontent.com https://cdn.jsdelivr.net; base-uri 'self'; form-action 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="description" content="Sistema oficial de gestión, planeación y difusión de solicitudes del Departamento de Comunicación y Difusión del Instituto Tecnológico de Pachuca (ITP).">
   <title>Mesa de Comunicación y Difusión | ITP</title>
@@ -22,31 +22,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://api.fontshare.com/v2/css?f[]=ranade@400,500,700&display=swap" rel="stylesheet">
   
-  <!-- cdns de librerías -->
-  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+  <!-- cdns fijados a versiones exactas con verificación sri (sha384) -->
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet" integrity="sha384-3bljoW7l4nTgpxifNAuotLa4NYLtoKwBGpmJ1B9bLTb+sIyQ2RnFBAkbkj1Xq257" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js" integrity="sha384-DZEVpSJ4pM9MDuXkgydQD2RzczjPKUOeRgRpYNZ5fyMlf14Pn/3dZbgIpdtH2YRb" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/es.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" integrity="sha384-RkASv+6KfBMW9eknReJIJ6b3UnjKOKC5bOUaNgIY778NFbQ8MtWq9Lr/khUgqtTt" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js" integrity="sha384-5JqMv4L/Xa0hfvtF06qboNdhvuYXUku9ZrhZh3bSk8VXF0A/RuSLHpLsSV9Zqhl6" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/es.js" integrity="sha384-j/aEP2b+3OKmGqank2qCSosSrlrF9jpIpdgApXq2ryJYBpLSbEi63/PDdL+rKmcQ" crossorigin="anonymous"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js" integrity="sha384-YB/DdIkloKoRpclWB8bNcYXWakt57USgtQPDzvnIDHYU0lasD5eWlXVo1S4ODukY" crossorigin="anonymous"></script>
 
 
-  <link rel="stylesheet" href="styles.css?v=20261108c">
-  <script>
-    (function() {
-      try {
-        var tema_guardado = localStorage.getItem('itp_tema_preferido');
-        if (tema_guardado === 'oscuro') {
-          document.documentElement.setAttribute('data-tema', 'oscuro');
-        }
-      } catch (e) {}
-    })();
-  </script>
-  <!-- cdns fijados a versiones exactas para prevenir ataques de cadena de suministro -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.46.1/dist/umd/supabase.min.js"></script>
-  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="styles.css?v=20261120a">
+  <script src="tema.js?v=20261120a"></script>
+  <!-- supabase y lucide desde jsdelivr con sri (sha384) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.46.1/dist/umd/supabase.min.js" integrity="sha384-f0hTybREi6MIGk1gXyD3UFZAL6sgul9hUVIQHUrByVE26aj5oryZvWtlcda66csi" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.460.0/dist/umd/lucide.min.js" integrity="sha384-ieG+IKD0d/ZPXyCBTMVAbqsQdns8QGJR/e26WMw7M4fkaI/rHcS/YIoi+ah9WGge" crossorigin="anonymous"></script>
 
   <!-- estilos personalizados para tom select, calendario, reloj, selectores de responsable y modales -->
   <style>
@@ -974,11 +965,11 @@
   <header class="site-header">
     <div class="header-interior">
       <div class="marca-institucional">
-        <img src="img/SEP.png" alt="Logo SEP" class="logo-sep" onerror="this.style.display='none'">
+        <img src="img/SEP.png" alt="Logo SEP" class="logo-sep" data-ocultar-error="1">
         <div class="separador-logos"></div>
-        <img src="img/TecPachuca.png" alt="Escudo ITP" class="logo-itp" onerror="this.style.display='none'">
+        <img src="img/TecPachuca.png" alt="Escudo ITP" class="logo-itp" data-ocultar-error="1">
         <div class="separador-logos"></div>
-        <img src="img/TECNM.png" alt="Logo TecNM" class="logo-tecnm" onerror="this.style.display='none'">
+        <img src="img/TECNM.png" alt="Logo TecNM" class="logo-tecnm" data-ocultar-error="1">
         <div class="textos-marca">
           <span class="titulo-marca">Tecnológico Nacional de México</span>
           <span class="subtitulo-marca">Instituto Tecnológico de Pachuca · Comunicación y Difusión</span>
@@ -987,27 +978,27 @@
       <div class="acciones-header">
         <span class="badge-conexion" id="estado-conexion">Verificando...</span>
         <div class="selector-vista">
-          <button class="btn-vista activo" id="btn-nueva" onclick="cambiar_vista('formulario')">Solicitar servicio</button>
-          <button class="btn-vista" id="btn-panel" onclick="intentar_abrir_panel()">
+          <button class="btn-vista activo" id="btn-nueva" data-accion="cambiar-vista" data-vista="formulario">Solicitar servicio</button>
+          <button class="btn-vista" id="btn-panel" data-accion="abrir-panel">
             <i data-lucide="lock" class="icono-inline" id="icono-candado"></i>
             <span>Panel Interno (<span id="contador-tickets">0</span>)</span>
           </button>
         </div>
 
         <!-- botón sutil de ayuda / manual de usuario junto a panel interno -->
-        <button type="button" class="btn-ayuda-sutil" id="btn-ayuda-header" onclick="abrir_modal_manual()" title="Manual de usuario y guía paso a paso">
+        <button type="button" class="btn-ayuda-sutil" id="btn-ayuda-header" data-accion="abrir-manual" title="Manual de usuario y guía paso a paso">
           <i data-lucide="help-circle"></i>
           <span>Ayuda</span>
         </button>
 
         <!-- botón de modo oscuro / claro estilo ios liquid glass y centro de notificaciones -->
-        <button type="button" class="btn-tema-ios" id="btn-tema-ios" onclick="alternar_modo_oscuro()" title="Cambiar modo oscuro / claro">
+        <button type="button" class="btn-tema-ios" id="btn-tema-ios" data-accion="alternar-tema" title="Cambiar modo oscuro / claro">
           <i data-lucide="moon" id="icono-tema-ios"></i>
         </button>
 
         <!-- centro de notificaciones estilo ios -->
         <div class="contenedor-notificaciones-ios" id="contenedor-notificaciones-ios">
-          <button type="button" class="btn-campana-ios" id="btn-campana-ios" onclick="alternar_notificaciones_ios(event)" title="Solicitudes nuevas sin asignar">
+          <button type="button" class="btn-campana-ios" id="btn-campana-ios" data-accion="alternar-notificaciones" title="Solicitudes nuevas sin asignar">
             <i data-lucide="bell"></i>
             <span class="badge-notificaciones-ios oculto" id="badge-notificaciones-ios">0</span>
           </button>
@@ -1036,7 +1027,7 @@
             <span class="pulso-tag"></span>
             Gestión de Solicitudes
           </span>
-          <h1>Mesa de <em>Comunicación y Difusión</em></h1>
+          <h1><span class="hero-texto-base">Mesa de</span> <em>Comunicación y Difusión</em></h1>
           <p class="hero-desc">Sistema centralizado para la planeación, diseño y difusión de actividades institucionales del ITP.</p>
         </div>
         <div class="meta-automatica">
@@ -1052,28 +1043,37 @@
         </div>
       </div>
 
-      <!-- rastreo público de folio -->
+      <!-- consulta privada de solicitudes por departamento y pin -->
       <section class="panel-rastreo">
         <div class="rastreo-cabecera">
           <div class="rastreo-textos">
-            <strong><i data-lucide="search" class="icono-inline"></i> Consulta el estatus de tu solicitud</strong>
-            <span>Ingresa tu número de folio para verificar avances y notas del departamento.</span>
+            <strong><i data-lucide="building-2" class="icono-inline"></i> Consulta las solicitudes de tu departamento</strong>
+            <span>Selecciona tu área e ingresa su PIN institucional para ver estatus, avances y sello de conformidad.</span>
           </div>
-          <form class="form-rastreo" onsubmit="consultar_folio_publico(event)" autocomplete="off">
-            <input type="text" id="input-rastreo-folio" placeholder="Ej. SRV-001" maxlength="12" required autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" enterkeyhint="search">
-            <button type="submit" class="btn-rastrear">Buscar</button>
-          </form>
+          <div class="rastreo-acceso-grupo">
+            <form class="form-rastreo form-rastreo-depto" id="form-rastreo-depto" autocomplete="off">
+              <div class="rastreo-select-depto-wrap">
+                <select id="select-rastreo-depto" required aria-label="Departamento solicitante"></select>
+              </div>
+              <input type="password" id="input-pin-depto" placeholder="PIN" minlength="4" maxlength="12" inputmode="numeric" required autocomplete="new-password" spellcheck="false" enterkeyhint="go" aria-label="PIN del departamento">
+              <button type="submit" class="btn-rastrear" id="btn-consultar-depto">Consultar</button>
+            </form>
+            <label class="recordar-equipo-check recordar-depto-check">
+              <input type="checkbox" id="check-recordar-depto" checked>
+              <span>Mantener sesión abierta en este equipo</span>
+            </label>
+          </div>
         </div>
         <div id="resultado-rastreo" class="oculto"></div>
       </section>
 
       <!-- formulario de creación -->
-      <form class="form-solicitud" id="form-solicitud" onsubmit="guardar_solicitud(event)" autocomplete="off">
+      <form class="form-solicitud" id="form-solicitud" autocomplete="off">
         <div id="seccion-catalogo">
           <span class="seccion-label">01 / Seleccione el servicio requerido</span>
           
           <div class="grid-catalogo" id="contenedor-catalogo">
-            <div class="tarjeta-servicio seleccionada" style="--delay: 0.05s" onclick="seleccionar_servicio(this, 'Diseño e impresión de material gráfico')">
+            <div class="tarjeta-servicio seleccionada" style="--delay: 0.05s" data-accion="seleccionar-servicio" data-servicio="Diseño e impresión de material gráfico">
               <div class="tarjeta-brillo"></div>
               <span class="icono"><i data-lucide="palette"></i></span>
               <div class="tarjeta-servicio-cuerpo">
@@ -1082,7 +1082,7 @@
               </div>
             </div>
 
-            <div class="tarjeta-servicio" style="--delay: 0.1s" onclick="seleccionar_servicio(this, 'Difusión en redes sociales')">
+            <div class="tarjeta-servicio" style="--delay: 0.1s" data-accion="seleccionar-servicio" data-servicio="Difusión en redes sociales">
               <div class="tarjeta-brillo"></div>
               <span class="icono"><i data-lucide="share-2"></i></span>
               <div class="tarjeta-servicio-cuerpo">
@@ -1091,7 +1091,7 @@
               </div>
             </div>
 
-            <div class="tarjeta-servicio" style="--delay: 0.15s" onclick="seleccionar_servicio(this, 'Cobertura fotográfica/audiovisual')">
+            <div class="tarjeta-servicio" style="--delay: 0.15s" data-accion="seleccionar-servicio" data-servicio="Cobertura fotográfica/audiovisual">
               <div class="tarjeta-brillo"></div>
               <span class="icono"><i data-lucide="camera"></i></span>
               <div class="tarjeta-servicio-cuerpo">
@@ -1100,7 +1100,7 @@
               </div>
             </div>
 
-            <div class="tarjeta-servicio" style="--delay: 0.2s" onclick="seleccionar_servicio(this, 'Producción de videos')">
+            <div class="tarjeta-servicio" style="--delay: 0.2s" data-accion="seleccionar-servicio" data-servicio="Producción de videos">
               <div class="tarjeta-brillo"></div>
               <span class="icono"><i data-lucide="clapperboard"></i></span>
               <div class="tarjeta-servicio-cuerpo">
@@ -1109,7 +1109,7 @@
               </div>
             </div>
 
-            <div class="tarjeta-servicio" style="--delay: 0.25s" onclick="seleccionar_servicio(this, 'Revisión y visto bueno de materiales')">
+            <div class="tarjeta-servicio" style="--delay: 0.25s" data-accion="seleccionar-servicio" data-servicio="Revisión y visto bueno de materiales">
               <div class="tarjeta-brillo"></div>
               <span class="icono"><i data-lucide="badge-check"></i></span>
               <div class="tarjeta-servicio-cuerpo">
@@ -1118,7 +1118,7 @@
               </div>
             </div>
 
-            <div class="tarjeta-servicio" style="--delay: 0.3s" onclick="seleccionar_servicio(this, 'Campañas institucionales')">
+            <div class="tarjeta-servicio" style="--delay: 0.3s" data-accion="seleccionar-servicio" data-servicio="Campañas institucionales">
               <div class="tarjeta-brillo"></div>
               <span class="icono"><i data-lucide="megaphone"></i></span>
               <div class="tarjeta-servicio-cuerpo">
@@ -1127,7 +1127,7 @@
               </div>
             </div>
 
-            <div class="tarjeta-servicio" style="--delay: 0.35s" onclick="seleccionar_servicio(this, 'Otro servicio')">
+            <div class="tarjeta-servicio" style="--delay: 0.35s" data-accion="seleccionar-servicio" data-servicio="Otro servicio">
               <div class="tarjeta-brillo"></div>
               <span class="icono"><i data-lucide="plus-circle"></i></span>
               <div class="tarjeta-servicio-cuerpo">
@@ -1170,7 +1170,7 @@
           </div>
 
           <span class="seccion-label form-solicitud-titulo-seccion form-solicitud-encabezado-03"><span class="form-solicitud-num">03</span> / Programación del evento asociado</span>
-          <div class="barra-condicional form-solicitud-pregunta-evento" onclick="alternar_evento()">
+          <div class="barra-condicional form-solicitud-pregunta-evento" data-accion="alternar-evento">
             <span>¿Esta solicitud está asociada a un evento con fecha y hora fija?</span>
             <div class="switch activo" id="switch-evento"></div>
           </div>
@@ -1188,7 +1188,7 @@
                   </div>
                   <div class="campo form-solicitud-campo">
                     <label>Hora del evento</label>
-                    <div class="contenedor-input-calendario" onclick="abrir_reloj_circular('hora-evento')">
+                    <div class="contenedor-input-calendario" data-accion="abrir-reloj" data-target="hora-evento">
                       <input type="text" id="hora-evento" class="input-fecha-con-icono input-reloj-personalizado" placeholder="--:--" readonly autocomplete="off">
                       <i data-lucide="clock" class="icono-calendario-fijo"></i>
                     </div>
@@ -1229,11 +1229,16 @@
             <span class="pulso-tag"></span>
             Panel de Administración
           </span>
-          <h2>Control de solicitudes <em>internas</em></h2>
+          <h2><span class="hero-texto-base">Control de solicitudes</span> <em>internas</em></h2>
         </div>
-        <button type="button" class="btn-bloquear-panel" onclick="cerrar_sesion_admin()">
-          <i data-lucide="log-out" class="icono-inline"></i> Cerrar sesión
-        </button>
+        <div class="panel-hero-acciones">
+          <button type="button" class="btn-claves-deptos" data-accion="abrir-pines-deptos">
+            <i data-lucide="key-round" class="icono-inline"></i> PINs de Departamentos
+          </button>
+          <button type="button" class="btn-bloquear-panel" data-accion="cerrar-sesion-admin">
+            <i data-lucide="log-out" class="icono-inline"></i> Cerrar sesión
+          </button>
+        </div>
       </div>
 
       <!-- cuadro único de métricas animadas con números centrados -->
@@ -1278,7 +1283,7 @@
           <span>Filtra por periodo para consultar y descargar el reporte en formato PDF.</span>
         </div>
         <div class="controles-reporte">
-          <select id="selector-mes-reporte" onchange="cambiar_mes_filtro()">
+          <select id="selector-mes-reporte">
             <option value="todos">Todo el Histórico</option>
             <optgroup label="Reportes Semestrales">
               <option value="sem-1">Semestre Ene – Jun</option>
@@ -1299,7 +1304,7 @@
               <option value="12">Diciembre</option>
             </optgroup>
           </select>
-          <button type="button" class="btn-accion-reporte Primario" onclick="abrir_modal_reporte()">
+          <button type="button" class="btn-accion-reporte Primario" data-accion="abrir-reporte">
             <i data-lucide="printer" class="icono-inline"></i> Generar Reporte PDF
           </button>
         </div>
@@ -1308,14 +1313,15 @@
       <div class="seccion-panel-tickets">
         <div class="barra-filtros">
           <div class="grupo-filtros">
-            <button class="btn-filtro activo" onclick="filtrar_estado('todos', this)">Todos</button>
-            <button class="btn-filtro" onclick="filtrar_estado('Pendiente', this)">Pendientes</button>
-            <button class="btn-filtro" onclick="filtrar_estado('En proceso', this)">En proceso</button>
-            <button class="btn-filtro" onclick="filtrar_estado('Terminado', this)">Terminados</button>
+            <button class="btn-filtro activo" data-accion="filtrar-estado" data-estado="todos">Todos</button>
+            <button class="btn-filtro" data-accion="filtrar-estado" data-estado="Pendiente">Pendientes</button>
+            <button class="btn-filtro" data-accion="filtrar-estado" data-estado="En proceso">En proceso</button>
+            <button class="btn-filtro" data-accion="filtrar-estado" data-estado="Terminado">Terminados</button>
           </div>
-          <div class="campo-busqueda">
-            <i data-lucide="search" class="icono-busqueda"></i>
-            <input type="text" id="buscador-tickets" placeholder="Buscar por área o folio..." maxlength="100" oninput="renderizar_tickets()" autocomplete="off" enterkeyhint="search">
+          <div class="campo-filtro-depto-panel">
+            <select id="filtro-departamento-panel" aria-label="Filtrar por departamento solicitante">
+              <option value="todos">Todos los departamentos</option>
+            </select>
           </div>
         </div>
 
@@ -1339,23 +1345,23 @@
     </footer>
   </div>
 
-  <button type="button" class="btn-flotante-arriba" id="btn-subir" onclick="ir_arriba_del_todo()" title="Subir a la parte superior">
+  <button type="button" class="btn-flotante-arriba" id="btn-subir" data-accion="ir-arriba" title="Subir a la parte superior">
     <i data-lucide="arrow-up"></i>
   </button>
 
   <div id="contenedor-toasts" class="oculto"></div>
 
   <!-- modal del selector de hora circular interactivo -->
-  <div class="modal-fondo oculto" id="modal-reloj-circular" onclick="if(event.target === this) cerrar_reloj_circular()">
+  <div class="modal-fondo oculto" id="modal-reloj-circular" data-cerrar-fondo="reloj">
     <div class="tarjeta-reloj-material">
       <span class="reloj-titulo-sup">Seleccione la hora</span>
       <div class="reloj-cabecera-digital">
-        <button type="button" class="reloj-caja-digito activo" id="reloj-btn-hora" onclick="cambiar_modo_reloj('horas')">12</button>
+        <button type="button" class="reloj-caja-digito activo" id="reloj-btn-hora" data-accion="modo-reloj" data-modo="horas">12</button>
         <span class="reloj-dos-puntos">:</span>
-        <button type="button" class="reloj-caja-digito" id="reloj-btn-minuto" onclick="cambiar_modo_reloj('minutos')">00</button>
+        <button type="button" class="reloj-caja-digito" id="reloj-btn-minuto" data-accion="modo-reloj" data-modo="minutos">00</button>
         <div class="reloj-selector-ampm">
-          <button type="button" class="btn-ampm" id="reloj-btn-am" onclick="seleccionar_ampm_reloj('AM')">A.M.</button>
-          <button type="button" class="btn-ampm activo" id="reloj-btn-pm" onclick="seleccionar_ampm_reloj('PM')">P.M.</button>
+          <button type="button" class="btn-ampm" id="reloj-btn-am" data-accion="ampm-reloj" data-ampm="AM">A.M.</button>
+          <button type="button" class="btn-ampm activo" id="reloj-btn-pm" data-accion="ampm-reloj" data-ampm="PM">P.M.</button>
         </div>
       </div>
 
@@ -1366,8 +1372,8 @@
       </div>
 
       <div class="reloj-acciones-pie">
-        <button type="button" class="btn-reloj-accion" onclick="cerrar_reloj_circular()">Cancelar</button>
-        <button type="button" class="btn-reloj-accion" onclick="confirmar_reloj_circular()">DE ACUERDO</button>
+        <button type="button" class="btn-reloj-accion" data-accion="cerrar-reloj">Cancelar</button>
+        <button type="button" class="btn-reloj-accion" data-accion="confirmar-reloj">DE ACUERDO</button>
       </div>
     </div>
   </div>
@@ -1379,7 +1385,7 @@
       <h3>¡Solicitud registrada con éxito!</h3>
       <p class="texto-modal">Conserve su número de folio institucional para consultas posteriores:</p>
       <strong class="folio-grande" id="modal-folio-texto">SRV-001</strong>
-      <button class="btn-enviar" onclick="cerrar_modal()">Entendido</button>
+      <button class="btn-enviar" data-accion="cerrar-modal-exito">Entendido</button>
     </div>
   </div>
 
@@ -1389,22 +1395,42 @@
       <div class="icono-modal-pin"><i data-lucide="shield"></i></div>
       <h3>Acceso Restringido</h3>
       <p class="texto-modal">Ingrese el PIN institucional del Departamento de Comunicación y Difusión:</p>
-      <form onsubmit="verificar_pin(event)" autocomplete="off">
+      <form id="form-pin-admin" autocomplete="off">
         <input type="password" id="input-pin" class="input-pin-acceso" placeholder="••••" minlength="6" maxlength="8" required autocomplete="off" enterkeyhint="done">
         <label class="recordar-equipo-check">
           <input type="checkbox" id="check-recordar-pin" checked>
           <span>Mantener sesión abierta en este equipo</span>
         </label>
         <div class="botones-modal-pin">
-          <button type="button" class="btn-cancelar-pin" onclick="cerrar_modal_pin()">Cancelar</button>
+          <button type="button" class="btn-cancelar-pin" data-accion="cerrar-modal-pin">Cancelar</button>
           <button type="submit" class="btn-enviar">Acceder</button>
         </div>
       </form>
     </div>
   </div>
 
+  <!-- modal de administración de pines por departamento -->
+  <div class="modal-fondo oculto no-imprimir" id="modal-pines-deptos" data-cerrar-fondo="pines-deptos">
+    <div class="modal-tarjeta-pines">
+      <div class="cabecera-modal-pines">
+        <div>
+          <span class="tag-institucional" style="margin-bottom: 0.2rem;">Control de Acceso por Área</span>
+          <h3>PINs de Departamentos</h3>
+          <p class="subtitulo-modal-pines">Cada área usa su PIN para consultar únicamente sus propias solicitudes.</p>
+        </div>
+        <button type="button" class="btn-cerrar-modal-rep" data-accion="cerrar-pines-deptos" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="barra-acciones-pines">
+        <button type="button" class="btn-generar-faltantes-pines" data-accion="generar-pines-faltantes">
+          <i data-lucide="wand-2" class="icono-inline"></i> Generar PINs faltantes
+        </button>
+      </div>
+      <div class="cuerpo-modal-pines" id="lista-pines-deptos"></div>
+    </div>
+  </div>
+
   <!-- modal de manual de usuario paso a paso -->
-  <div class="modal-fondo oculto no-imprimir" id="modal-manual" onclick="if(event.target === this) cerrar_modal_manual()">
+  <div class="modal-fondo oculto no-imprimir" id="modal-manual" data-cerrar-fondo="manual">
     <div class="modal-tarjeta-manual">
       <div class="cabecera-modal-manual">
         <div class="cabecera-manual-izq">
@@ -1414,15 +1440,15 @@
           </span>
           <h3>Manual de Usuario · Mesa de Comunicación y Difusión</h3>
         </div>
-        <button type="button" class="btn-cerrar-modal-rep" onclick="cerrar_modal_manual()" title="Cerrar manual">✕</button>
+        <button type="button" class="btn-cerrar-modal-rep" data-accion="cerrar-manual" title="Cerrar manual">✕</button>
       </div>
 
       <div class="barra-tabs-manual" id="barra-tabs-manual">
-        <button type="button" class="btn-tab-manual activo" id="tab-manual-publico" onclick="cambiar_tab_manual('publico')">
+        <button type="button" class="btn-tab-manual activo" id="tab-manual-publico" data-accion="tab-manual" data-tab="publico">
           <i data-lucide="file-plus-2"></i>
           <span>Manual para Solicitudes (Departamentos)</span>
         </button>
-        <button type="button" class="btn-tab-manual oculto" id="tab-manual-admin" onclick="cambiar_tab_manual('admin')">
+        <button type="button" class="btn-tab-manual oculto" id="tab-manual-admin" data-accion="tab-manual" data-tab="admin">
           <i data-lucide="shield-check"></i>
           <span>Manual del Panel Interno (Administración)</span>
         </button>
@@ -1458,19 +1484,14 @@
               <div class="cabecera-paso-manual">
                 <span class="numero-paso-manual">2</span>
                 <div>
-                  <h4>Sección: "Consulta el estatus de tu solicitud"</h4>
-                  <span class="etiqueta-ubicacion-manual">Franja horizontal de búsqueda debajo del encabezado principal</span>
+                  <h4>Sección: "Consulta las solicitudes de tu departamento"</h4>
+                  <span class="etiqueta-ubicacion-manual">Franja horizontal debajo del encabezado principal</span>
                 </div>
               </div>
               <ul class="lista-explicacion-manual">
-                <li><strong>¿Cómo consultar un folio?:</strong> Ingresa tu código de seguimiento (por ejemplo, <code>SRV-001</code>) en el campo de texto y presiona el botón <strong>"Buscar"</strong> o presiona enter.</li>
-                <li><strong>Información detallada que muestra el resultado:</strong>
-                  <br>• <strong>Datos generales:</strong> Folio, fecha en que se solicitó, servicio requerido, departamento solicitante, descripción y datos del evento presencial (si aplica).
-                  <br>• <strong>Insignia de Estado actual:</strong> <span class="pildora-mini-manual rojo">Pendiente</span> (solicitud recibida en espera de asignación), <span class="pildora-mini-manual amarillo">En proceso</span> (ya cuenta con responsable y/o fecha límite asignada), <span class="pildora-mini-manual verde">Terminado</span> (servicio concluido) o <span class="pildora-mini-manual denegada">Denegada</span> (si no procedió, se muestra un recuadro rojo con el motivo detallado).
-                  <br>• <strong>Línea de tiempo de progreso:</strong> Muestra gráficamente el avance paso a paso: <em>Recibida → Asignada → En proceso → Terminada</em> (o <em>Recibida → Revisión → Denegada</em>).
-                  <br>• <strong>Responsable asignado y Fecha límite estimada:</strong> Indica quién del equipo atiende tu solicitud y la fecha estimada para concluir la solicitud.
-                  <br>• <strong>Notas del seguimiento:</strong> Lista de comentarios, acuerdos o avances registrados por el departamento. Para ocultar la consulta, presiona <strong>"Cerrar consulta"</strong>.
-                </li>
+                <li><strong>¿Cómo consultar tus solicitudes?:</strong> Selecciona tu <strong>Departamento / Área</strong>, ingresa el <strong>PIN institucional</strong> de tu área (si no cuentas con él, solicítalo al Departamento de Comunicación y Difusión) y presiona <strong>"Consultar"</strong>. La casilla <strong>"Mantener sesión abierta en este equipo"</strong> conserva el acceso activo en tu navegador aunque recargues o cierres la página.</li>
+                <li><strong>Información que muestra el resultado:</strong> Lista completa de las solicitudes enviadas por tu departamento. Al tocar cualquier solicitud se muestran sus detalles, estado (<span class="pildora-mini-manual rojo">Pendiente</span>, <span class="pildora-mini-manual amarillo">En proceso</span>, <span class="pildora-mini-manual verde">Terminado</span> o <span class="pildora-mini-manual denegada">Denegada</span>), línea de tiempo, responsable(s) asignado(s), fecha límite estimada y notas del seguimiento. Usa <strong>"Actualizar"</strong> para refrescar el estado en cualquier momento o <strong>"Cerrar sesión"</strong> para olvidar el acceso en ese equipo.</li>
+                <li><strong>Sello de conformidad:</strong> En solicitudes no denegadas, el área solicitante puede presionar <strong>"Poner sello de conformidad"</strong> para avalar que el servicio fue recibido y cumplido a satisfacción. Solo puede cancelarse con el botón <strong>"Quitar sello"</strong> dentro de las primeras 24 horas; transcurrido ese plazo queda como definitivo.</li>
               </ul>
             </div>
 
@@ -1560,6 +1581,7 @@
                 <li><strong>Ingreso mediante PIN y sesión en el equipo:</strong> Al pulsar <strong>"Panel Interno"</strong> se solicita el PIN institucional. La casilla <strong>"Mantener sesión abierta en este equipo"</strong> permite conservar el acceso activo aunque recargues o cierres el navegador.</li>
                 <li><strong>Campanita de Notificaciones (esquina superior derecha):</strong> Aparece únicamente cuando la sesión está iniciada y muestra con un contador rojo cuántas solicitudes están pendientes de asignar. Al tocar una solicitud dentro de la campanita, el sistema abre el Panel Interno, se desplaza hasta esa solicitud, la despliega automáticamente y la resalta.</li>
                 <li><strong>¿Cuándo se limpia una notificación?:</strong> En cuanto le asignas un responsable o marcas la solicitud como <strong>Denegada</strong>.</li>
+                <li><strong>Botón "PINs de Departamentos":</strong> Abre el administrador para consultar, editar o usar <strong>"Generar PINs faltantes"</strong> para asignar las claves con las que cada área consulta sus solicitudes.</li>
                 <li><strong>Botón "Cerrar sesión":</strong> Cierra la sesión activa y bloquea inmediatamente el Panel Interno y la campanita de notificaciones.</li>
               </ul>
             </div>
@@ -1568,13 +1590,13 @@
               <div class="cabecera-paso-manual">
                 <span class="numero-paso-manual">2</span>
                 <div>
-                  <h4>Métricas en Vivo, Filtros, Buscador y Conmutador Lista / Calendario</h4>
+                  <h4>Métricas en Vivo, Filtros por Estado/Departamento y Vista Lista / Calendario</h4>
                   <span class="etiqueta-ubicacion-manual">Parte superior del Panel Interno</span>
                 </div>
               </div>
               <ul class="lista-explicacion-manual">
                 <li><strong>Los 4 contadores superiores:</strong> Se actualizan automáticamente según el periodo elegido, mostrando el total de solicitudes <strong>Total registradas</strong>, <strong>Pendientes</strong>, <strong>En proceso</strong> y <strong>Terminadas</strong>.</li>
-                <li><strong>Filtros por estado y Buscador en tiempo real:</strong> Filtra con un clic entre <em>Todos</em>, <em>Pendientes</em>, <em>En proceso</em> o <em>Terminados</em>, o escribe en el buscador cualquier folio, área solicitante o nombre de servicio.</li>
+                <li><strong>Filtros por estado y por Departamento:</strong> Filtra con un clic entre <em>Todos</em>, <em>Pendientes</em>, <em>En proceso</em> o <em>Terminados</em>, y selecciona cualquier departamento en la lista desplegable para ver únicamente las solicitudes de esa área.</li>
                 <li><strong>Lista / Calendario:</strong>
                   <br>• <strong>Vista Lista:</strong> Muestra las solicitudes en filas expandibles paginadas.
                   <br>• <strong>Vista Calendario:</strong> Muestra el cronograma mensual de actividades con código de colores por estado y botones para cambiar de mes. En computadora se visualizan las tarjetas dentro de cada día; en teléfonos móviles se muestra una cuadrícula compacta con puntos de color por estado y, al tocar cualquier día, se despliega debajo la agenda completa de ese día. Al tocar cualquier evento del calendario, el sistema te lleva directo a su solicitud en la lista y la abre.
@@ -1593,9 +1615,10 @@
               <ul class="lista-explicacion-manual">
                 <li><strong>Solicitud cerrada (vista compacta por defecto):</strong> Cada solicitud se presenta como una fila con una franja lateral del color de su estado:
                   <br>• <strong>Columna izquierda:</strong> Muestra destacados la fecha y la hora del evento presencial (o la leyenda <em>"Sin evento presencial asociado"</em> cuando no aplica).
-                  <br>• <strong>Columna derecha:</strong> Muestra el título del servicio, el departamento solicitante y el lugar del evento. Debajo, en una sola línea de resumen, muestra en texto plano el <strong>Estado</strong>, el <strong>Responsable asignado</strong> y la <strong>Fecha límite de entrega</strong> (si la solicitud está denegada, oculta el responsable y la fecha límite para evitar ruido visual).
+                  <br>• <strong>Columna derecha:</strong> Muestra el título del servicio, el departamento solicitante y el lugar del evento. Debajo, en una sola línea de resumen, muestra en texto plano el <strong>Estado</strong>, el/los <strong>Responsable(s) asignado(s)</strong> (incluyendo personal de apoyo) y la <strong>Fecha límite de entrega</strong> (si la solicitud está denegada, oculta el responsable y la fecha límite para evitar ruido visual).
                 </li>
                 <li><strong>Solicitud abierta (desplegable):</strong> Al hacer clic o presionar <code>Enter</code> / <code>Espacio</code> sobre la parte superior de cualquier fila, esta se despliega mostrando el número de folio, la fecha en que fue solicitada, la especificación y descripción completa, todos los controles de administración y el área de notas. Tocar de nuevo la cabecera la cierra.</li>
+                <li><strong>Sello de conformidad:</strong> Cuando el área solicitante emite el sello desde la consulta de solicitudes de su departamento, aparece la insignia <strong>"Sello de conformidad"</strong> en la fila y el detalle con la fecha de emisión y estado (<em>Cancelable (24 h)</em> o <em>Definitivo</em>) al desplegar la solicitud.</li>
               </ul>
             </div>
 
@@ -1616,7 +1639,7 @@
                 <li><strong>Botón "Denegar":</strong> Al presionarlo, solicita escribir el motivo del rechazo. Al confirmar:
                   <br>1. La solicitud pasa a estado <span class="pildora-mini-manual denegada">Denegada</span>.
                   <br>2. Se ocultan automáticamente los controles de <em>Responsable asignado</em>, <em>Comunicación (Reporte)</em> y <em>Fecha límite de entrega</em> para mantener limpia la vista.
-                  <br>3. El motivo queda visible para el departamento solicitante cuando consulte su folio en el buscador público.
+                  <br>3. El motivo queda visible para el departamento solicitante cuando consulte las solicitudes de su departamento.
                   <br>4. El botón cambia a <strong>"Reactivar"</strong>; si se reactiva la solicitud, vuelven a mostrarse todos los controles de gestión.
                 </li>
               </ul>
@@ -1631,7 +1654,7 @@
                 </div>
               </div>
               <ul class="lista-explicacion-manual">
-                <li><strong>Menú "Responsable asignado" y WhatsApp:</strong> Al seleccionar a un integrante del equipo, el sistema ofrece abrir WhatsApp con el mensaje completo de asignación ya redactado. Además, permanece visible el botón verde <strong>"WhatsApp"</strong> junto al selector para enviar recordatorios posteriores.</li>
+                <li><strong>Menú "Responsable asignado", "+ Apoyo" y WhatsApp:</strong> Al seleccionar a un integrante del equipo, el sistema ofrece abrir WhatsApp con el mensaje de asignación. Si el servicio lo cubren 2 o 3 personas, presiona <strong>"+ Apoyo"</strong> para agregar hasta 2 responsables adicionales (incluyendo <em>Chico(a) de servicio</em>) o retíralos con <strong>"✕"</strong>; el botón verde <strong>"WhatsApp"</strong> permite enviar el recordatorio a cualquiera de los asignados.</li>
                 <li><strong>Opción "Chico(a) de servicio":</strong> Habilita un campo de texto manual debajo del selector para escribir el nombre del prestador(a) de servicio social y confirmarlo con el botón <strong>"Asignar"</strong> (sin abrir WhatsApp).</li>
                 <li><strong>Casillas "Comunicación (Reporte)":</strong> Permite marcar <strong>Interna</strong> y/o <strong>Externa</strong> (por defecto se marca <em>Interna</em>) para indicar dónde se colocará la <strong>"X"</strong> en la bitácora oficial.</li>
                 <li><strong>"Fecha límite de entrega" (Casilla Habilitar):</strong> Al marcar <strong>"Habilitar"</strong> se despliega el selector de fecha para definir el día límite de entrega. Si se desmarca, la solicitud queda sin fecha límite asignada.</li>
@@ -1650,10 +1673,10 @@
               <ul class="lista-explicacion-manual">
                 <li><strong>Selector de Periodo:</strong> Filtra tanto las solicitudes en pantalla como los datos del reporte por mes específico (Enero a Diciembre), por semestre (<strong>Semestre Ene – Jun</strong> o <strong>Semestre Jul – Dic</strong>) o <strong>Todo el Histórico</strong>.</li>
                 <li><strong>Botón "Generar Reporte PDF":</strong> Abre la vista previa imprimible con el formato oficial <strong>ITPAC-PL-PO-001-03 (Bitácora de Comunicación Institucional)</strong>:
-                  <br>• <strong>Solicitudes normales:</strong> Llena automáticamente <em>Actividad</em>, <em>Emisor</em>, <em>Fecha de recepción</em>, <em>Fecha de vencimiento</em> (usa la fecha límite o, en su defecto, la fecha del evento), marca con <strong>"X"</strong> <em>Comunicación Interna / Externa</em>, <em>Medios a utilizar</em> y en <em>Observaciones</em> coloca el folio y responsable (ej. <code>SRV-001 — Asignado a: Karla</code>).
+                  <br>• <strong>Solicitudes normales:</strong> Llena automáticamente <em>Actividad</em>, <em>Emisor</em>, <em>Fecha de recepción</em>, <em>Fecha de vencimiento</em> (usa la fecha límite o, en su defecto, la fecha del evento), marca con <strong>"X"</strong> <em>Comunicación Interna / Externa</em>, <em>Medios a utilizar</em> y en <em>Observaciones</em> coloca el folio y el/los responsable(s) asignado(s) (ej. <code>SRV-001 — Asignado a: Karla, Juan</code>).
                   <br>• <strong>Solicitudes denegadas:</strong> Registra <em>Actividad</em>, <em>Emisor</em> y <em>Fecha de recepción</em>, deja en blanco las columnas de vencimiento, comunicación y medios, y en <em>Observaciones</em> indica únicamente el folio y que fue denegada (ej. <code>SRV-001 — Denegada</code>).
                 </li>
-                <li><strong>Impresión y Corte Semestral de Base de Datos:</strong> Dentro de la vista previa, pulsa <strong>"Imprimir / Guardar PDF"</strong>. Si tienes seleccionado un periodo semestral (<em>Semestre Ene – Jun</em> o <em>Semestre Jul – Dic</em>), tras imprimir el reporte el sistema mostrará un asistente con doble confirmación de seguridad (escribiendo la palabra <code>ELIMINAR</code>) por si deseas vaciar los registros concluido el semestre y reiniciar el contador de folios desde 1.</li>
+                <li><strong>Impresión y Corte Semestral de Base de Datos:</strong> Dentro de la vista previa, pulsa <strong>"Imprimir / Guardar PDF"</strong>; el documento se pagina automáticamente en hojas horizontales repitiendo los encabezados de tabla en cada página. Si tienes seleccionado un periodo semestral (<em>Semestre Ene – Jun</em> o <em>Semestre Jul – Dic</em>), tras imprimir el reporte el sistema mostrará un asistente con doble confirmación de seguridad (escribiendo la palabra <code>ELIMINAR</code>) por si deseas vaciar los registros concluido el semestre y reiniciar el contador de folios desde 1.</li>
               </ul>
             </div>
           </div>
@@ -1671,10 +1694,10 @@
           <h3 id="titulo-mes-reporte">Reporte Oficial</h3>
         </div>
         <div class="acciones-modal-reporte">
-          <button type="button" class="btn-accion-reporte Primario" onclick="imprimir_reporte_pdf()">
+          <button type="button" class="btn-accion-reporte Primario" data-accion="imprimir-reporte">
             <i data-lucide="printer" class="icono-inline"></i> Imprimir / Guardar PDF
           </button>
-          <button type="button" class="btn-cerrar-modal-rep" onclick="cerrar_modal_reporte()">✕</button>
+          <button type="button" class="btn-cerrar-modal-rep" data-accion="cerrar-reporte">✕</button>
         </div>
       </div>
 
@@ -1693,6 +1716,6 @@
     </defs>
   </svg>
 
-  <script src="app.js?v=20261108b"></script>
+  <script src="app.js?v=20261120a"></script>
 </body>
 </html>

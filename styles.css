@@ -3203,7 +3203,7 @@ html[data-tema="oscuro"] .btn-cerrar-modal-rep:hover {
 body > .ts-dropdown,
 .ts-dropdown {
   z-index: 9999 !important;
-  border-radius: 2px !important;
+  border-radius: 5px !important;
   box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18) !important;
   border: 1px solid var(--border-soft, #e2e8f0) !important;
   overflow: hidden;
@@ -5165,6 +5165,7 @@ textarea,
 .cuerpo-reporte-ejecutivo {
   display: flex !important;
   justify-content: center !important;
+  align-items: flex-start !important;
   flex: 1 1 auto !important;
   min-height: 0 !important;
   overflow-y: auto !important;
@@ -5179,13 +5180,15 @@ textarea,
   width: 100% !important;
   max-width: 1040px !important;
   min-width: 760px;
+  height: auto !important;
+  flex: 0 0 auto !important;
   margin: 0 auto !important;
   background: #ffffff !important;
   color: #000000 !important;
   padding: 1.1cm 1.3cm !important;
   border-radius: 6px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 .tabla-formato-exacto-reporte {
@@ -6172,7 +6175,7 @@ html[data-tema="oscuro"] .hero h2 em {
   background: #ffffff;
   border: 1px solid var(--border-soft);
   padding: 0.55rem 0.85rem;
-  border-radius: 2px !important;
+  border-radius: 5px !important;
   font-family: inherit;
   font-size: 0.85rem;
   color: var(--ink-main);
@@ -6189,7 +6192,7 @@ html[data-tema="oscuro"] .hero h2 em {
   color: #ffffff;
   border: none;
   padding: 0.55rem 1.1rem;
-  border-radius: 2px !important;
+  border-radius: 5px !important;
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
@@ -6616,8 +6619,6 @@ html[data-tema="oscuro"] .pi-input-nota-grupo input:focus {
 
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo input,
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo textarea,
-#seccion-detalles.form-solicitud-editorial .form-solicitud-campo select,
-#seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single .ts-control,
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.input-fecha-con-icono,
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.form-control {
   background: transparent !important;
@@ -6627,18 +6628,54 @@ html[data-tema="oscuro"] .pi-input-nota-grupo input:focus {
   border-bottom: 1.5px solid rgba(27, 57, 106, 0.42) !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  padding: 0.58rem 0 !important;
+  padding: 0.58rem 0.15rem !important;
   font-size: 0.94rem !important;
   color: var(--ink-main) !important;
+  transition: border-color 0.24s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.24s ease, transform 0.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
+#seccion-detalles.form-solicitud-editorial .form-solicitud-campo input:hover:not(:focus),
+#seccion-detalles.form-solicitud-editorial .form-solicitud-campo textarea:hover:not(:focus),
+#seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.input-fecha-con-icono:hover:not(:focus),
+#seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.form-control:hover:not(:focus) {
+  background-color: rgba(27, 57, 106, 0.025) !important;
+  border-bottom-color: rgba(27, 57, 106, 0.72) !important;
+}
+
+/* desplegables de solicitud encerrados parcialmente solo de los lados (abiertos arriba) */
+#seccion-detalles.form-solicitud-editorial .form-solicitud-campo select,
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single .ts-control {
-  padding-right: 1.8rem !important;
+  background-color: rgba(27, 57, 106, 0.028) !important;
+  background-image:
+    linear-gradient(to top, rgba(27, 57, 106, 0.42) 0%, rgba(27, 57, 106, 0.42) 56%, transparent 56%),
+    linear-gradient(to top, rgba(27, 57, 106, 0.42) 0%, rgba(27, 57, 106, 0.42) 56%, transparent 56%) !important;
+  background-size: 1.5px 100%, 1.5px 100% !important;
+  background-position: left bottom, right bottom !important;
+  background-repeat: no-repeat !important;
+  background-origin: border-box !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 1.5px solid rgba(27, 57, 106, 0.42) !important;
+  border-radius: 0 0 5px 5px !important;
+  box-shadow: none !important;
+  padding: 0.58rem 2.1rem 0.58rem 0.78rem !important;
+  font-size: 0.94rem !important;
   font-weight: 600 !important;
+  color: var(--ink-main) !important;
+  transition: background-color 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease !important;
+}
+
+#seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single:hover .ts-control {
+  background-color: rgba(0, 119, 182, 0.05) !important;
+  background-image:
+    linear-gradient(to top, rgba(0, 119, 182, 0.68) 0%, rgba(0, 119, 182, 0.68) 60%, transparent 60%),
+    linear-gradient(to top, rgba(0, 119, 182, 0.68) 0%, rgba(0, 119, 182, 0.68) 60%, transparent 60%) !important;
+  border-bottom-color: rgba(0, 119, 182, 0.72) !important;
 }
 
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single .ts-control::after {
-  right: 0.25rem !important;
+  right: 0.68rem !important;
 }
 
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.input-fecha-con-icono,
@@ -6652,10 +6689,19 @@ html[data-tema="oscuro"] .pi-input-nota-grupo input:focus {
 
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo input:focus,
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo textarea:focus,
-#seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single.focus .ts-control,
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.input-fecha-con-icono:focus,
 #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.form-control:focus {
-  background: transparent !important;
+  background-color: rgba(0, 119, 182, 0.03) !important;
+  border-bottom-color: var(--itp-accent) !important;
+  box-shadow: 0 2px 0 0 var(--itp-accent), 0 8px 16px -10px rgba(0, 119, 182, 0.32) !important;
+  transform: translateY(-1px);
+}
+
+#seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single.focus .ts-control {
+  background-color: rgba(0, 119, 182, 0.055) !important;
+  background-image:
+    linear-gradient(to top, var(--itp-accent) 0%, var(--itp-accent) 64%, transparent 64%),
+    linear-gradient(to top, var(--itp-accent) 0%, var(--itp-accent) 64%, transparent 64%) !important;
   border-bottom-color: var(--itp-accent) !important;
   box-shadow: 0 2px 0 0 var(--itp-accent) !important;
 }
@@ -6686,10 +6732,10 @@ html[data-tema="oscuro"] .pi-input-nota-grupo input:focus {
   margin-top: 0 !important;
 }
 
-/* 6. botón "enviar solicitud oficial": ancho completo y esquinas casi rectas */
+/* 6. botón "enviar solicitud oficial": ancho completo y esquinas con redondeo tenue */
 #seccion-detalles.form-solicitud-editorial .form-solicitud-btn-enviar {
   width: 100% !important;
-  border-radius: 2px !important;
+  border-radius: 5px !important;
   margin-top: 0.75rem;
 }
 
@@ -6720,24 +6766,57 @@ html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solici
 
 html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo input,
 html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo textarea,
-html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo select,
-html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single .ts-control,
 html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.input-fecha-con-icono,
 html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.form-control {
-  background: transparent !important;
+  background-color: transparent !important;
   border-top: none !important;
   border-left: none !important;
   border-right: none !important;
-  border-bottom-color: rgba(148, 163, 184, 0.3) !important;
+  border-bottom-color: rgba(148, 163, 184, 0.32) !important;
   color: #f8fafc !important;
+}
+
+html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo input:hover:not(:focus),
+html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo textarea:hover:not(:focus),
+html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.input-fecha-con-icono:hover:not(:focus),
+html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.form-control:hover:not(:focus) {
+  background-color: rgba(56, 189, 248, 0.04) !important;
+  border-bottom-color: rgba(148, 163, 184, 0.55) !important;
+}
+
+html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo select,
+html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single .ts-control {
+  background-color: rgba(148, 163, 184, 0.06) !important;
+  background-image:
+    linear-gradient(to top, rgba(148, 163, 184, 0.38) 0%, rgba(148, 163, 184, 0.38) 56%, transparent 56%),
+    linear-gradient(to top, rgba(148, 163, 184, 0.38) 0%, rgba(148, 163, 184, 0.38) 56%, transparent 56%) !important;
+  border-bottom-color: rgba(148, 163, 184, 0.38) !important;
+  color: #f8fafc !important;
+}
+
+html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single:hover .ts-control {
+  background-color: rgba(56, 189, 248, 0.09) !important;
+  background-image:
+    linear-gradient(to top, rgba(56, 189, 248, 0.72) 0%, rgba(56, 189, 248, 0.72) 60%, transparent 60%),
+    linear-gradient(to top, rgba(56, 189, 248, 0.72) 0%, rgba(56, 189, 248, 0.72) 60%, transparent 60%) !important;
+  border-bottom-color: rgba(56, 189, 248, 0.75) !important;
 }
 
 html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo input:focus,
 html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo textarea:focus,
-html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single.focus .ts-control,
 html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.input-fecha-con-icono:focus,
 html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .contenedor-input-calendario input.form-control:focus {
-  background: transparent !important;
+  background-color: rgba(56, 189, 248, 0.045) !important;
+  border-bottom-color: #38bdf8 !important;
+  box-shadow: 0 2px 0 0 #38bdf8, 0 8px 16px -10px rgba(56, 189, 248, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single.focus .ts-control {
+  background-color: rgba(56, 189, 248, 0.1) !important;
+  background-image:
+    linear-gradient(to top, #38bdf8 0%, #38bdf8 64%, transparent 64%),
+    linear-gradient(to top, #38bdf8 0%, #38bdf8 64%, transparent 64%) !important;
   border-bottom-color: #38bdf8 !important;
   box-shadow: 0 2px 0 0 #38bdf8 !important;
 }
@@ -6759,7 +6838,7 @@ html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solici
 
 /* 1. etiquetas superiores: "gestión oficial de solicitudes" y "panel de administración" */
 .tag-institucional {
-  border-radius: 2px !important;
+  border-radius: 5px !important;
   box-shadow: none !important;
 }
 
@@ -6844,20 +6923,21 @@ html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solici
 .controles-reporte select,
 .controles-reporte .ts-wrapper.single .ts-control,
 .btn-accion-reporte {
-  border-radius: 2px !important;
+  border-radius: 5px !important;
   box-shadow: none !important;
 }
 
 .controles-reporte .ts-dropdown,
-.fila-responsable-acciones .ts-dropdown {
-  border-radius: 2px !important;
+.fila-responsable-acciones .ts-dropdown,
+body > .ts-dropdown {
+  border-radius: 5px !important;
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.18) !important;
   border: 1.5px solid #cbd5e1 !important;
   z-index: 9999 !important;
 }
 
 /* 4. en todas las solicitudes: menú de "responsable asignado", botón de "denegar"
-   y menú/campo de "fecha límite de entrega" cuadrados */
+   y menú/campo de "fecha límite de entrega" con redondeo tenue */
 .fila-responsable-acciones .ts-wrapper.single .ts-control,
 .btn-notificar-wa,
 .caja-servicio-social-manual input,
@@ -6868,7 +6948,7 @@ html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solici
 .campo-interno .contenedor-input-calendario input.form-control,
 .input-fecha-limite-panel,
 .toggle-fecha-manual input[type="checkbox"] {
-  border-radius: 2px !important;
+  border-radius: 5px !important;
   box-shadow: none !important;
 }
 
@@ -6879,7 +6959,7 @@ html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solici
   flex-shrink: 0;
 }
 
-/* 6. calendarios (flatpickr y cronograma del panel) y caja/botones del reloj cuadrados,
+/* 6. calendarios (flatpickr y cronograma del panel) y caja/botones del reloj con redondeo tenue,
    conservando redonda la esfera del reloj */
 .flatpickr-calendar,
 .flatpickr-months,
@@ -6900,7 +6980,7 @@ html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solici
 .cal-hoy .cal-num-dia,
 .cal-evento,
 .cal-punto {
-  border-radius: 2px !important;
+  border-radius: 5px !important;
 }
 
 .reloj-esfera-contenedor,
@@ -6913,9 +6993,9 @@ html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solici
   animation: entrada_suave 0.22s ease !important;
 }
 
-/* 7. manuales de usuario con estética de hojas de manual impreso y botones de selección cuadrados */
+/* 7. manuales de usuario con estética de hojas de manual impreso (las hojas quedan cuadradas) */
 .modal-tarjeta-manual {
-  border-radius: 2px !important;
+  border-radius: 5px !important;
   border: 1px solid #cbd5e1 !important;
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.42) !important;
   animation: entrada_suave 0.22s ease !important;
@@ -6928,7 +7008,7 @@ html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solici
 }
 
 .cabecera-modal-manual .btn-cerrar-modal-rep {
-  border-radius: 2px !important;
+  border-radius: 5px !important;
 }
 
 .barra-tabs-manual {
@@ -6939,7 +7019,7 @@ html[data-tema="oscuro"] #seccion-detalles.form-solicitud-editorial .form-solici
 }
 
 .btn-tab-manual {
-  border-radius: 2px !important;
+  border-radius: 5px !important;
   box-shadow: none !important;
   padding: 0.55rem 1.1rem !important;
   border: 1.5px solid #cbd5e1 !important;
@@ -7109,6 +7189,1471 @@ html[data-tema="oscuro"] .tarjeta-paso-manual {
 html[data-tema="oscuro"] .cabecera-paso-manual {
   border-bottom-color: rgba(148, 163, 184, 0.15) !important;
 }
+
+/* =========================================================================
+   8. sello de conformidad del departamento solicitante
+   ========================================================================= */
+.bloque-sello-conformidad {
+  margin-top: 1rem;
+  padding: 0.9rem 1.05rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.bloque-sello-conformidad.pendiente {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.bloque-sello-conformidad.emitido {
+  background: #ecfdf5;
+  border-color: #86efac;
+  border-left: 4px solid #15803d;
+}
+
+.sello-emitido-cabecera {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.sello-emblema {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.sello-emblema > svg {
+  width: 22px;
+  height: 22px;
+  color: #15803d;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sello-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink-main);
+}
+
+.bloque-sello-conformidad.pendiente .sello-titulo svg {
+  width: 17px;
+  height: 17px;
+  color: var(--itp-blue);
+}
+
+.bloque-sello-conformidad.emitido .sello-titulo {
+  color: #14532d;
+}
+
+.sello-desc {
+  margin: 0.2rem 0 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  line-height: 1.4;
+}
+
+.bloque-sello-conformidad.emitido .sello-desc {
+  color: #166534;
+}
+
+.btn-poner-sello {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  background: #15803d;
+  color: #ffffff;
+  border: 1px solid #166534;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.15s ease;
+}
+
+.btn-poner-sello:hover {
+  background: #166534;
+}
+
+.btn-poner-sello svg,
+.btn-quitar-sello svg,
+.sello-bloqueado-tag svg,
+.pi-badge-sello svg,
+.pi-sello-detalle svg,
+.btn-actualizar-depto svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.sello-acciones-cancelar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.28rem;
+}
+
+.btn-quitar-sello {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.42rem 0.8rem;
+  background: #ffffff;
+  color: #b91c1c;
+  border: 1px solid rgba(220, 38, 38, 0.45);
+  border-radius: 5px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.btn-quitar-sello:hover {
+  background: #fef2f2;
+}
+
+.sello-plazo-texto {
+  font-size: 0.72rem;
+  color: #166534;
+  font-weight: 600;
+}
+
+.sello-bloqueado-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.65rem;
+  background: rgba(21, 128, 61, 0.12);
+  color: #14532d;
+  border: 1px solid rgba(21, 128, 61, 0.28);
+  border-radius: 5px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.pi-badge-sello {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.18rem 0.5rem;
+  background: #ecfdf5;
+  color: #15803d;
+  border: 1px solid #86efac;
+  border-radius: 5px;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.pi-sello-detalle {
+  margin-top: 0.65rem;
+  padding: 0.5rem 0.75rem;
+  background: #ecfdf5;
+  border: 1px solid #86efac;
+  border-left: 3px solid #15803d;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: #14532d;
+}
+
+@media (max-width: 768px) {
+  .bloque-sello-conformidad,
+  .sello-emitido-cabecera {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-poner-sello {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .sello-acciones-cancelar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+html[data-tema="oscuro"] .bloque-sello-conformidad.pendiente {
+  background: rgba(30, 41, 59, 0.65);
+  border-color: rgba(148, 163, 184, 0.24);
+}
+
+html[data-tema="oscuro"] .bloque-sello-conformidad.pendiente .sello-titulo svg {
+  color: #60a5fa;
+}
+
+html[data-tema="oscuro"] .bloque-sello-conformidad.emitido,
+html[data-tema="oscuro"] .pi-sello-detalle {
+  background: rgba(20, 83, 45, 0.28);
+  border-color: rgba(74, 222, 128, 0.38);
+  border-left-color: #22c55e;
+  color: #dcfce7;
+}
+
+html[data-tema="oscuro"] .bloque-sello-conformidad.emitido .sello-titulo,
+html[data-tema="oscuro"] .bloque-sello-conformidad.emitido .sello-desc,
+html[data-tema="oscuro"] .sello-plazo-texto,
+html[data-tema="oscuro"] .sello-emblema > svg {
+  color: #bbf7d0;
+}
+
+html[data-tema="oscuro"] .btn-quitar-sello {
+  background: rgba(127, 29, 29, 0.35);
+  color: #fecaca;
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+html[data-tema="oscuro"] .btn-quitar-sello:hover {
+  background: rgba(127, 29, 29, 0.55);
+}
+
+html[data-tema="oscuro"] .sello-bloqueado-tag,
+html[data-tema="oscuro"] .pi-badge-sello {
+  background: rgba(20, 83, 45, 0.42);
+  color: #bbf7d0;
+  border-color: rgba(74, 222, 128, 0.38);
+}
+
+/* =========================================================================
+   9. consulta privada por departamento, filtro interno y múltiples apoyos
+   ========================================================================= */
+.rastreo-acceso-grupo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+
+.recordar-depto-check {
+  margin: 0 !important;
+  font-size: 0.76rem !important;
+}
+
+.form-rastreo-depto {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.rastreo-select-depto-wrap {
+  width: 355px;
+  max-width: 100%;
+  min-width: 240px;
+}
+
+.rastreo-select-depto-wrap .ts-wrapper.single .ts-control,
+.campo-filtro-depto-panel .ts-wrapper.single .ts-control {
+  background: #f8fafc !important;
+  border: 1.5px solid var(--border-soft) !important;
+  border-radius: 5px !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  overflow: hidden !important;
+  height: 36px !important;
+  padding: 0 2.1rem 0 0.75rem !important;
+  min-height: 0 !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  color: var(--ink-main) !important;
+  box-shadow: none !important;
+}
+
+.rastreo-select-depto-wrap .ts-wrapper.single .ts-control > .item,
+.campo-filtro-depto-panel .ts-wrapper.single .ts-control > .item {
+  display: block !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.rastreo-select-depto-wrap .ts-wrapper.single.focus .ts-control,
+.campo-filtro-depto-panel .ts-wrapper.single.focus .ts-control {
+  background: #ffffff !important;
+  border-color: var(--itp-accent) !important;
+}
+
+.panel-rastreo #input-pin-depto,
+.panel-rastreo #btn-consultar-depto {
+  height: 36px !important;
+  box-sizing: border-box !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#input-pin-depto {
+  width: 112px !important;
+  text-transform: none !important;
+  letter-spacing: 0.14em;
+  text-align: center;
+}
+
+.pub-depto-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 0.85rem;
+  margin-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.pub-depto-titulo-grupo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.pub-depto-titulo-grupo strong {
+  color: var(--itp-blue);
+  font-size: 0.96rem;
+}
+
+.pub-depto-conteo {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  background: #f1f5f9;
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+}
+
+.pub-depto-acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.btn-actualizar-depto {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.34rem 0.72rem;
+  background: #f8fafc;
+  color: var(--itp-blue);
+  border: 1px solid var(--border-soft);
+  border-radius: 5px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.btn-actualizar-depto:hover {
+  background: #eff6ff;
+  border-color: var(--itp-accent);
+}
+
+.pub-lista-solicitudes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.pub-fila-solicitud {
+  border: 1px solid var(--border-soft);
+  border-left: 4px solid #cbd5e1;
+  border-radius: 5px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.pub-fila-solicitud.borde-Pendiente { border-left-color: #dc2626; }
+.pub-fila-solicitud.borde-En-proceso { border-left-color: #d97706; }
+.pub-fila-solicitud.borde-Terminado { border-left-color: #16a34a; }
+.pub-fila-solicitud.borde-Denegada { border-left-color: #64748b; }
+
+.pub-cabecera-expandible {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease;
+}
+
+.pub-cabecera-expandible:hover {
+  background: #f8fafc;
+}
+
+.pub-col-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.pub-col-meta .ticket-folio {
+  margin-bottom: 0;
+  border-radius: 5px;
+}
+
+.pub-fecha-sol {
+  font-size: 0.74rem;
+  color: var(--ink-muted);
+  font-weight: 600;
+}
+
+.pub-col-resumen {
+  min-width: 0;
+}
+
+.pub-servicio-titulo {
+  font-weight: 700;
+  font-size: 0.94rem;
+  color: var(--ink-main);
+  margin-bottom: 0.35rem;
+}
+
+.pub-resumen-datos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem 1rem;
+  font-size: 0.8rem;
+}
+
+.pub-indicador-toggle {
+  color: var(--ink-muted);
+  display: inline-flex;
+  transition: transform 0.2s ease;
+}
+
+.pub-fila-solicitud.pub-abierta .pub-indicador-toggle {
+  transform: rotate(180deg);
+}
+
+.pub-cuerpo-expandible {
+  display: none;
+  padding: 0.95rem 1.05rem 1.05rem;
+  border-top: 1px solid var(--border-soft);
+  background: #fbfdff;
+}
+
+.pub-fila-solicitud.pub-abierta .pub-cuerpo-expandible {
+  display: block;
+}
+
+/* controles del panel interno: botón pines y filtro por departamento */
+.panel-hero-acciones {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.panel-hero-acciones .btn-bloquear-panel {
+  border-radius: 5px;
+}
+
+.btn-claves-deptos {
+  background: #ffffff;
+  color: var(--itp-blue);
+  border: 1px solid var(--border-soft);
+  padding: 0.65rem 1.05rem;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.btn-claves-deptos:hover {
+  background: #eff6ff;
+  border-color: var(--itp-accent);
+}
+
+.campo-filtro-depto-panel {
+  width: 355px;
+  max-width: 100%;
+  min-width: 240px;
+}
+
+/* modal de pines por departamento */
+.modal-tarjeta-pines {
+  background: #ffffff;
+  width: 96%;
+  max-width: 720px;
+  max-height: 88vh;
+  border-radius: 5px;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: entrada_suave 0.22s ease;
+}
+
+.cabecera-modal-pines {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.15rem 1.4rem 0.95rem;
+  border-bottom: 2px solid var(--itp-blue);
+}
+
+.cabecera-modal-pines h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--itp-blue);
+}
+
+.subtitulo-modal-pines {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+
+.barra-acciones-pines {
+  padding: 0.7rem 1.4rem;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-generar-faltantes-pines {
+  background: var(--itp-blue);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cuerpo-modal-pines {
+  padding: 0.75rem 1.4rem 1.25rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.fila-pin-depto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 5px;
+  background: #ffffff;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.fila-pin-depto.pin-guardado-ok {
+  border-color: #22c55e;
+  background: #ecfdf5;
+}
+
+.nombre-depto-pin {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink-main);
+}
+
+.controles-pin-depto {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.input-cfg-pin {
+  width: 96px;
+  padding: 0.36rem 0.55rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 5px;
+  font-family: monospace;
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-align: center;
+  background: #f8fafc;
+  color: var(--ink-main);
+}
+
+.btn-gen-pin-item,
+.btn-guardar-pin-item {
+  border-radius: 5px;
+  padding: 0.38rem 0.65rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-gen-pin-item {
+  background: #f1f5f9;
+  color: var(--ink-main);
+  border: 1px solid #cbd5e1;
+}
+
+.btn-guardar-pin-item {
+  background: #15803d;
+  color: #ffffff;
+  border: 1px solid #166534;
+}
+
+.btn-gen-pin-item svg,
+.btn-guardar-pin-item svg,
+.btn-agregar-apoyo svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* múltiples apoyos por solicitud */
+.bloque-apoyo-item {
+  margin-top: 0.5rem;
+}
+
+.fila-apoyo-responsable {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.fila-apoyo-responsable .ts-wrapper {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+.fila-apoyo-responsable .ts-wrapper.single .ts-control {
+  background: #f8fafc !important;
+  border: 1.5px solid var(--border-soft) !important;
+  border-radius: 5px !important;
+  box-shadow: none !important;
+  padding: 0.44rem 2rem 0.44rem 0.75rem !important;
+  min-height: 0 !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  color: var(--ink-main) !important;
+}
+
+.fila-apoyo-responsable .ts-wrapper.single.focus .ts-control {
+  background: #ffffff !important;
+  border-color: var(--itp-accent) !important;
+}
+
+.btn-quitar-apoyo {
+  width: 32px;
+  height: 34px;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  border-radius: 5px;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.btn-agregar-apoyo {
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.34rem 0.72rem;
+  background: #eff6ff;
+  color: var(--itp-blue);
+  border: 1px dashed #93c5fd;
+  border-radius: 5px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-agregar-apoyo:hover {
+  background: #dbeafe;
+}
+
+.lista-botones-wa-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btn-wa-selector-item {
+  width: 100%;
+  padding: 0.65rem 1rem;
+  background: #ecfdf5;
+  color: #166534;
+  border: 1px solid #86efac;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.btn-wa-selector-item:hover {
+  background: #dcfce7;
+}
+
+/* =========================================================================
+   10. redondeo tenue uniforme y microinteracciones en cuadros de texto
+   ========================================================================= */
+.btn-tema-ios,
+.btn-ayuda-top,
+.btn-notif-ios,
+.btn-filtro,
+.btn-pagina-ticket,
+.btn-icono-nota,
+.tarjeta-servicio,
+.modal-tarjeta,
+.modal-tarjeta-reporte,
+.popover-notificaciones-ios,
+.tarjeta-notif-ios,
+.nota-individual,
+.rastreo-grid-meta,
+.alerta-denegada-rastreo,
+.input-pin-acceso,
+.swal2-popup,
+.swal2-confirm,
+.swal2-cancel,
+.swal2-input {
+  border-radius: 5px !important;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  transition:
+    border-color 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.24s ease,
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder,
+textarea::placeholder {
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+input[type="text"]:focus::placeholder,
+input[type="password"]:focus::placeholder,
+textarea:focus::placeholder {
+  opacity: 0.45;
+  transform: translateX(4px);
+}
+
+#input-pin-depto:hover:not(:focus),
+#input-pin:hover:not(:focus),
+.input-cfg-pin:hover:not(:focus),
+.pi-input-nota-grupo input:hover:not(:focus),
+.caja-servicio-social-manual input:hover:not(:focus),
+.input-fecha-limite-panel:hover:not(:focus),
+.swal2-input:hover:not(:focus) {
+  border-color: rgba(0, 119, 182, 0.55) !important;
+}
+
+#input-pin-depto:focus,
+#input-pin:focus,
+.input-cfg-pin:focus,
+.pi-input-nota-grupo input:focus,
+.caja-servicio-social-manual input:focus,
+.input-fecha-limite-panel:focus,
+.swal2-input:focus {
+  border-color: var(--itp-accent) !important;
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.14) !important;
+  transform: translateY(-1px);
+}
+
+html[data-tema="oscuro"] #input-pin-depto:focus,
+html[data-tema="oscuro"] #input-pin:focus,
+html[data-tema="oscuro"] .input-cfg-pin:focus,
+html[data-tema="oscuro"] .pi-input-nota-grupo input:focus,
+html[data-tema="oscuro"] .caja-servicio-social-manual input:focus,
+html[data-tema="oscuro"] .input-fecha-limite-panel:focus,
+html[data-tema="oscuro"] .swal2-input:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2) !important;
+}
+
+@media (max-width: 768px) {
+  .rastreo-acceso-grupo {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .form-rastreo-depto {
+    width: 100%;
+  }
+
+  .rastreo-select-depto-wrap,
+  .campo-filtro-depto-panel {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #input-pin-depto {
+    flex: 1 1 100px !important;
+    width: auto !important;
+    font-size: 16px !important;
+  }
+
+  .pub-cabecera-expandible {
+    grid-template-columns: 1fr auto;
+    gap: 0.45rem 0.65rem;
+  }
+
+  .pub-col-meta {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .panel-hero-acciones {
+    width: 100%;
+  }
+
+  .panel-hero-acciones .btn-claves-deptos,
+  .panel-hero-acciones .btn-bloquear-panel {
+    flex: 1;
+    justify-content: center;
+    border-radius: 5px;
+  }
+
+  .fila-pin-depto {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controles-pin-depto {
+    justify-content: flex-end;
+  }
+
+  .input-cfg-pin {
+    flex: 1;
+    font-size: 16px;
+  }
+}
+
+html[data-tema="oscuro"] .rastreo-select-depto-wrap .ts-wrapper.single .ts-control,
+html[data-tema="oscuro"] .campo-filtro-depto-panel .ts-wrapper.single .ts-control,
+html[data-tema="oscuro"] .fila-apoyo-responsable .ts-wrapper.single .ts-control {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border-color: rgba(148, 163, 184, 0.25) !important;
+  color: #f1f5f9 !important;
+}
+
+html[data-tema="oscuro"] .pub-depto-titulo-grupo strong {
+  color: #60a5fa;
+}
+
+html[data-tema="oscuro"] .pub-depto-conteo {
+  background: rgba(30, 41, 59, 0.85);
+  color: #cbd5e1;
+}
+
+html[data-tema="oscuro"] .pub-fila-solicitud,
+html[data-tema="oscuro"] .modal-tarjeta-pines,
+html[data-tema="oscuro"] .fila-pin-depto {
+  background: #0f172a;
+  border-color: rgba(148, 163, 184, 0.22);
+}
+
+html[data-tema="oscuro"] .pub-cabecera-expandible:hover {
+  background: rgba(30, 41, 59, 0.55);
+}
+
+html[data-tema="oscuro"] .pub-cuerpo-expandible,
+html[data-tema="oscuro"] .barra-acciones-pines {
+  background: rgba(15, 23, 42, 0.65);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+html[data-tema="oscuro"] .pub-servicio-titulo,
+html[data-tema="oscuro"] .nombre-depto-pin,
+html[data-tema="oscuro"] .cabecera-modal-pines h3 {
+  color: #f1f5f9;
+}
+
+html[data-tema="oscuro"] .btn-claves-deptos,
+html[data-tema="oscuro"] .btn-gen-pin-item,
+html[data-tema="oscuro"] .btn-actualizar-depto {
+  background: rgba(30, 41, 59, 0.85);
+  color: #93c5fd;
+  border-color: rgba(148, 163, 184, 0.28);
+}
+
+html[data-tema="oscuro"] .input-cfg-pin {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(148, 163, 184, 0.3);
+  color: #f8fafc;
+}
+
+html[data-tema="oscuro"] .btn-agregar-apoyo {
+  background: rgba(30, 58, 138, 0.32);
+  color: #93c5fd;
+  border-color: rgba(96, 165, 250, 0.4);
+}
+
+html[data-tema="oscuro"] .btn-quitar-apoyo {
+  background: rgba(127, 29, 29, 0.35);
+  color: #fecaca;
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+html[data-tema="oscuro"] .fila-pin-depto.pin-guardado-ok {
+  border-color: #22c55e;
+  background: rgba(20, 83, 45, 0.35);
+}
+
+/* =========================================================================
+   títulos principales (.hero): animación tipo reflejo / liquid glass
+   conservando exactamente los colores y degradados institucionales
+   ========================================================================= */
+.hero {
+  --hero-grad-base: linear-gradient(180deg, var(--itp-blue) 0%, var(--itp-blue) 100%);
+  --hero-grad-em: linear-gradient(135deg, var(--itp-accent), #023e8a);
+  --hero-reflejo-base: linear-gradient(
+    112deg,
+    transparent 0%,
+    transparent 26%,
+    rgba(0, 119, 182, 0.26) 36%,
+    rgba(56, 189, 248, 0.62) 45%,
+    rgba(224, 242, 254, 0.90) 49.5%,
+    rgba(255, 255, 255, 0.94) 51%,
+    rgba(125, 211, 252, 0.56) 57%,
+    rgba(0, 119, 182, 0.20) 65%,
+    transparent 74%,
+    transparent 100%
+  );
+  --hero-reflejo-em: linear-gradient(
+    112deg,
+    transparent 0%,
+    transparent 26%,
+    rgba(56, 189, 248, 0.32) 36%,
+    rgba(125, 211, 252, 0.68) 45%,
+    rgba(240, 249, 255, 0.92) 49.5%,
+    rgba(255, 255, 255, 0.96) 51%,
+    rgba(125, 211, 252, 0.58) 57%,
+    rgba(56, 189, 248, 0.24) 65%,
+    transparent 74%,
+    transparent 100%
+  );
+  --hero-sombra-reposo: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.85)) drop-shadow(0 3px 8px rgba(27, 57, 106, 0.08));
+  --hero-sombra-pico: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.96)) drop-shadow(0 5px 15px rgba(0, 119, 182, 0.22));
+}
+
+html[data-tema="oscuro"] .hero {
+  --hero-grad-base: linear-gradient(180deg, #f8fafc 0%, #f8fafc 100%);
+  --hero-grad-em: linear-gradient(135deg, #38bdf8, #60a5fa);
+  --hero-reflejo-base: linear-gradient(
+    112deg,
+    transparent 0%,
+    transparent 26%,
+    rgba(56, 189, 248, 0.45) 36%,
+    rgba(14, 165, 233, 0.72) 44%,
+    rgba(186, 230, 253, 0.88) 48.5%,
+    rgba(255, 255, 255, 0.98) 50.5%,
+    rgba(125, 211, 252, 0.72) 56%,
+    rgba(56, 189, 248, 0.35) 65%,
+    transparent 74%,
+    transparent 100%
+  );
+  --hero-reflejo-em: linear-gradient(
+    112deg,
+    transparent 0%,
+    transparent 26%,
+    rgba(125, 211, 252, 0.34) 36%,
+    rgba(224, 242, 254, 0.72) 45%,
+    rgba(255, 255, 255, 0.96) 50%,
+    rgba(186, 230, 253, 0.68) 56%,
+    rgba(96, 165, 250, 0.28) 65%,
+    transparent 74%,
+    transparent 100%
+  );
+  --hero-sombra-reposo: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.10)) drop-shadow(0 4px 12px rgba(56, 189, 248, 0.14));
+  --hero-sombra-pico: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.22)) drop-shadow(0 6px 20px rgba(56, 189, 248, 0.34));
+}
+
+.hero h1,
+.hero h2 {
+  filter: var(--hero-sombra-reposo);
+  transition: filter 0.35s var(--ease-fluid);
+}
+
+.hero h1:hover,
+.hero h2:hover {
+  filter: var(--hero-sombra-pico);
+}
+
+.hero h1 .hero-texto-base,
+.hero h2 .hero-texto-base {
+  display: inline;
+  background-color: transparent;
+  background-image: var(--hero-reflejo-base), var(--hero-grad-base);
+  background-size: 7em 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: calc(0% - 7em) 0%, 0% 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.hero h1 em,
+.hero h2 em,
+html[data-tema="oscuro"] .hero h1 em,
+html[data-tema="oscuro"] .hero h2 em {
+  background-color: transparent;
+  background-image: var(--hero-reflejo-em), var(--hero-grad-em);
+  background-size: 7em 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: calc(0% - 7em) 0%, 0% 0%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* coreografía continua por longitud de cada frase (velocidad visual uniforme) */
+#vista-formulario .hero h1 .hero-texto-base {
+  animation: hero_reflejo_mesa_base 6.8s linear infinite;
+}
+
+#vista-formulario .hero h1 em {
+  animation: hero_reflejo_mesa_em 6.8s linear infinite;
+}
+
+#vista-panel .hero h2 .hero-texto-base {
+  animation: hero_reflejo_panel_base 6.8s linear infinite;
+}
+
+#vista-panel .hero h2 em {
+  animation: hero_reflejo_panel_em 6.8s linear infinite;
+}
+
+@keyframes hero_reflejo_mesa_base {
+  0% {
+    background-position: calc(0% - 7em) 0%, 0% 0%;
+  }
+  15% {
+    background-position: calc(100% + 7em) 0%, 0% 0%;
+  }
+  100% {
+    background-position: calc(100% + 7em) 0%, 0% 0%;
+  }
+}
+
+@keyframes hero_reflejo_mesa_em {
+  0%, 5.5% {
+    background-position: calc(0% - 7em) 0%, 0% 0%;
+  }
+  32.5% {
+    background-position: calc(100% + 7em) 0%, 0% 0%;
+  }
+  100% {
+    background-position: calc(100% + 7em) 0%, 0% 0%;
+  }
+}
+
+@keyframes hero_reflejo_panel_base {
+  0% {
+    background-position: calc(0% - 7em) 0%, 0% 0%;
+  }
+  26% {
+    background-position: calc(100% + 7em) 0%, 0% 0%;
+  }
+  100% {
+    background-position: calc(100% + 7em) 0%, 0% 0%;
+  }
+}
+
+@keyframes hero_reflejo_panel_em {
+  0%, 16% {
+    background-position: calc(0% - 7em) 0%, 0% 0%;
+  }
+  32% {
+    background-position: calc(100% + 7em) 0%, 0% 0%;
+  }
+  100% {
+    background-position: calc(100% + 7em) 0%, 0% 0%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  #vista-formulario .hero h1 .hero-texto-base,
+  #vista-formulario .hero h1 em,
+  #vista-panel .hero h2 .hero-texto-base,
+  #vista-panel .hero h2 em {
+    animation: none !important;
+    background-image: var(--hero-grad-em);
+    background-size: 100% 100%;
+    background-position: 0% 0%;
+  }
+
+  #vista-formulario .hero h1 .hero-texto-base,
+  #vista-panel .hero h2 .hero-texto-base {
+    background-image: var(--hero-grad-base);
+    background-size: 100% 100%;
+    background-position: 0% 0%;
+  }
+}
+
+/* =========================================================================
+   microinteracciones en menús desplegables (tom-select y select nativos)
+   + despliegue suave y ágil (170ms)
+   ========================================================================= */
+body .ts-wrapper.single .ts-control,
+body select {
+  transition:
+    border-color 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.22s ease,
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+body .ts-wrapper.single .ts-control::after {
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.2s ease,
+    color 0.2s ease !important;
+}
+
+body .ts-wrapper.single:hover:not(.dropdown-active) .ts-control {
+  border-color: rgba(0, 119, 182, 0.62) !important;
+}
+
+body .ts-wrapper.single:hover:not(.dropdown-active) .ts-control::after {
+  opacity: 1 !important;
+  transform: translateY(calc(-50% + 1px)) !important;
+}
+
+body .ts-wrapper.single.focus .ts-control,
+body .ts-wrapper.single.dropdown-active .ts-control,
+body .controles-reporte .ts-wrapper.single.focus .ts-control,
+body .controles-reporte .ts-wrapper.single.dropdown-active .ts-control,
+body .rastreo-select-depto-wrap .ts-wrapper.single.focus .ts-control,
+body .rastreo-select-depto-wrap .ts-wrapper.single.dropdown-active .ts-control,
+body .campo-filtro-depto-panel .ts-wrapper.single.focus .ts-control,
+body .campo-filtro-depto-panel .ts-wrapper.single.dropdown-active .ts-control,
+body .fila-responsable-acciones .ts-wrapper.single.focus .ts-control,
+body .fila-responsable-acciones .ts-wrapper.single.dropdown-active .ts-control,
+body .fila-apoyo-responsable .ts-wrapper.single.focus .ts-control,
+body .fila-apoyo-responsable .ts-wrapper.single.dropdown-active .ts-control {
+  border-color: var(--itp-accent) !important;
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.14) !important;
+  transform: translateY(-1px);
+}
+
+body #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single.focus .ts-control,
+body #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single.dropdown-active .ts-control {
+  box-shadow: 0 2px 0 0 var(--itp-accent), 0 8px 16px -10px rgba(0, 119, 182, 0.32) !important;
+  transform: translateY(-1px);
+}
+
+body .ts-wrapper.single.dropdown-active .ts-control::after {
+  opacity: 1 !important;
+  color: var(--itp-accent) !important;
+  transform: translateY(-50%) rotate(180deg) !important;
+}
+
+html[data-tema="oscuro"] body .ts-wrapper.single:hover:not(.dropdown-active) .ts-control {
+  border-color: rgba(56, 189, 248, 0.62) !important;
+}
+
+html[data-tema="oscuro"] body .ts-wrapper.single.focus .ts-control,
+html[data-tema="oscuro"] body .ts-wrapper.single.dropdown-active .ts-control,
+html[data-tema="oscuro"] body .controles-reporte .ts-wrapper.single.focus .ts-control,
+html[data-tema="oscuro"] body .controles-reporte .ts-wrapper.single.dropdown-active .ts-control,
+html[data-tema="oscuro"] body .rastreo-select-depto-wrap .ts-wrapper.single.focus .ts-control,
+html[data-tema="oscuro"] body .rastreo-select-depto-wrap .ts-wrapper.single.dropdown-active .ts-control,
+html[data-tema="oscuro"] body .campo-filtro-depto-panel .ts-wrapper.single.focus .ts-control,
+html[data-tema="oscuro"] body .campo-filtro-depto-panel .ts-wrapper.single.dropdown-active .ts-control,
+html[data-tema="oscuro"] body .fila-responsable-acciones .ts-wrapper.single.focus .ts-control,
+html[data-tema="oscuro"] body .fila-responsable-acciones .ts-wrapper.single.dropdown-active .ts-control,
+html[data-tema="oscuro"] body .fila-apoyo-responsable .ts-wrapper.single.focus .ts-control,
+html[data-tema="oscuro"] body .fila-apoyo-responsable .ts-wrapper.single.dropdown-active .ts-control {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2) !important;
+  transform: translateY(-1px);
+}
+
+html[data-tema="oscuro"] body #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single.focus .ts-control,
+html[data-tema="oscuro"] body #seccion-detalles.form-solicitud-editorial .form-solicitud-campo .ts-wrapper.single.dropdown-active .ts-control {
+  box-shadow: 0 2px 0 0 #38bdf8, 0 8px 16px -10px rgba(56, 189, 248, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+html[data-tema="oscuro"] body .ts-wrapper.single.dropdown-active .ts-control::after {
+  color: #38bdf8 !important;
+}
+
+@keyframes ts_despliegue_suave {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px) scaleY(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+body .ts-dropdown,
+body > .ts-dropdown {
+  transform-origin: top center;
+  animation: ts_despliegue_suave 0.17s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body .ts-dropdown .option {
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease,
+    padding-left 0.16s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+body .ts-dropdown .option:hover,
+body .ts-dropdown .option.active {
+  padding-left: 16px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body .ts-dropdown,
+  body > .ts-dropdown {
+    animation: none !important;
+  }
+
+  body .ts-wrapper.single .ts-control,
+  body .ts-wrapper.single .ts-control::after,
+  body .ts-dropdown .option {
+    transition: none !important;
+  }
+}
+
+/* =========================================================================
+   separación alternada de solicitudes (modo oscuro igual que modo claro)
+   ========================================================================= */
+.pub-fila-solicitud:nth-child(odd) {
+  background: #f4f8fc;
+}
+
+.pub-fila-solicitud:nth-child(even) {
+  background: #ffffff;
+}
+
+html[data-tema="oscuro"] #vista-panel .ticket-item.pi-fila-solicitud:nth-child(odd) {
+  background: linear-gradient(
+    180deg,
+    rgba(11, 18, 34, 0.96) 0%,
+    rgba(13, 21, 38, 0.94) 100%
+  ) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22) !important;
+}
+
+html[data-tema="oscuro"] #vista-panel .ticket-item.pi-fila-solicitud:nth-child(even) {
+  background: linear-gradient(
+    180deg,
+    rgba(28, 41, 66, 0.94) 0%,
+    rgba(23, 35, 58, 0.92) 100%
+  ) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.22) !important;
+}
+
+html[data-tema="oscuro"] .pub-fila-solicitud:nth-child(odd) {
+  background: #0c1426;
+}
+
+html[data-tema="oscuro"] .pub-fila-solicitud:nth-child(even) {
+  background: #1a2740;
+}
+
+/* =========================================================================
+   impresión / exportación pdf oficial (multipágina limpia, sin recortes ni marco)
+   al final de la hoja para imponerse sobre todos los estilos de modal y tema oscuro
+   ========================================================================= */
+@media print {
+  @page {
+    size: letter landscape;
+    margin: 0.9cm 1cm;
+  }
+
+  html,
+  body,
+  html[data-tema="oscuro"],
+  html[data-tema="oscuro"] body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .fondo-ambiental,
+  .site-header,
+  #inicio-pagina,
+  .btn-flotante-arriba,
+  .contenedor-toasts,
+  #modal-exito,
+  #modal-pin,
+  #modal-pines-deptos,
+  #modal-manual,
+  .no-imprimir,
+  .swal2-container,
+  body > .ts-dropdown {
+    display: none !important;
+  }
+
+  #modal-reporte,
+  html[data-tema="oscuro"] #modal-reporte {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    overflow: visible !important;
+    z-index: auto !important;
+  }
+
+  #modal-reporte.oculto {
+    display: none !important;
+  }
+
+  .modal-tarjeta-reporte,
+  html[data-tema="oscuro"] .modal-tarjeta-reporte {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .cuerpo-reporte-ejecutivo,
+  html[data-tema="oscuro"] .cuerpo-reporte-ejecutivo {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+  }
+
+  .hoja-oficio-itp,
+  .hoja-oficio-itp.hoja-bitacora-horizontal {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .contenedor-bitacora-iso,
+  .bloque-superior-bitacora {
+    display: block !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .tabla-encabezado-bitacora-iso {
+    width: 100% !important;
+    margin-bottom: 12px !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .tabla-formato-exacto-reporte {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  .tabla-formato-exacto-reporte thead {
+    display: table-header-group !important;
+  }
+
+  .tabla-formato-exacto-reporte tbody {
+    display: table-row-group !important;
+  }
+
+  .tabla-formato-exacto-reporte tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .pie-bitacora-iso {
+    margin-top: 16px !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+
+
 
 
 
