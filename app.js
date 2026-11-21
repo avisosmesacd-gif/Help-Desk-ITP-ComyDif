@@ -80,6 +80,8 @@ let consulta_token_actual = '';
 let solicitudes_depto_publico = [];
 const tickets_abiertos_publico = new Set();
 let pines_deptos_cache = [];
+let canal_realtime_panel = null;
+let temporizador_realtime_panel = null;
 
 // detecta automáticamente el mes actual (01 al 12) para seleccionarlo por defecto
 const mes_actual_sistema = String(new Date().getMonth() + 1).padStart(2, '0');
@@ -1686,10 +1688,12 @@ async function inicializar() {
     sesion_autorizada = Boolean(datos_sesion && datos_sesion.session);
     if (sesion_autorizada) {
       await cargar_directorio_responsables();
+      iniciar_realtime_panel();
     }
 
     cliente_db.auth.onAuthStateChange(async (evento, sesion) => {
       if (evento === 'SIGNED_OUT' || !sesion) {
+        detener_realtime_panel();
         sesion_autorizada = false;
         actualizar_icono_candado();
         limpiar_directorio_responsables_memoria();
@@ -1700,6 +1704,7 @@ async function inicializar() {
         const ya_autorizada = sesion_autorizada;
         sesion_autorizada = true;
         actualizar_icono_candado();
+        iniciar_realtime_panel();
         if (!ya_autorizada || solicitudes.length === 0) {
           await cargar_directorio_responsables();
           await cargar_solicitudes();
@@ -1707,6 +1712,7 @@ async function inicializar() {
       } else if (evento === 'TOKEN_REFRESHED' || evento === 'USER_UPDATED') {
         sesion_autorizada = true;
         actualizar_icono_candado();
+        iniciar_realtime_panel();
       }
     });
   }
@@ -1731,11 +1737,59 @@ async function inicializar() {
   } catch (e) {}
 
   setInterval(() => {
-    if (sesion_autorizada || !usar_nube) {
-      renderizar_tickets();
+    if (document.hidden) return;
+    if (sesion_autorizada && usar_nube && cliente_db) {
+      cargar_solicitudes(true);
+    } else if (!usar_nube) {
+      if (!esta_editando_en_panel()) {
+        renderizar_tickets();
+      }
       actualizar_notificaciones_ios();
     }
   }, 60000);
+}
+
+function esta_editando_en_panel() {
+  const cont = document.getElementById('contenedor-tickets');
+  if (!cont) return false;
+  const activo = document.activeElement;
+  if (activo && cont.contains(activo) && /^(INPUT|TEXTAREA|SELECT)$/.test(activo.tagName)) {
+    return true;
+  }
+  return Boolean(cont.querySelector('.ts-wrapper.dropdown-active'));
+}
+
+function iniciar_realtime_panel() {
+  if (!usar_nube || !cliente_db || !sesion_autorizada || canal_realtime_panel) return;
+  try {
+    canal_realtime_panel = cliente_db
+      .channel('solicitudes-panel-itp')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'solicitudes' },
+        () => {
+          if (!sesion_autorizada) return;
+          clearTimeout(temporizador_realtime_panel);
+          temporizador_realtime_panel = setTimeout(() => {
+            cargar_solicitudes(true);
+          }, 500);
+        }
+      )
+      .subscribe();
+  } catch (e) {
+    canal_realtime_panel = null;
+  }
+}
+
+function detener_realtime_panel() {
+  clearTimeout(temporizador_realtime_panel);
+  temporizador_realtime_panel = null;
+  if (canal_realtime_panel && cliente_db) {
+    try {
+      cliente_db.removeChannel(canal_realtime_panel);
+    } catch (e) {}
+  }
+  canal_realtime_panel = null;
 }
 
 function actualizar_icono_candado() {
@@ -1824,6 +1878,7 @@ async function cerrar_sesion_admin() {
   });
 
   if (resultado.isConfirmed) {
+    detener_realtime_panel();
     try { localStorage.removeItem('itp_recordar_equipo'); } catch (err) {}
     if (usar_nube && cliente_db) {
       await cliente_db.auth.signOut();
@@ -2787,7 +2842,7 @@ async function sincronizar_estados_nube() {
 }
 
 // carga del listado completo restringida a usuarios con sesión activa en el panel interno
-async function cargar_solicitudes() {
+async function cargar_solicitudes(respetar_edicion = false) {
   if (usar_nube) {
     if (!sesion_autorizada || !cliente_db) {
       await actualizar_folio_preview();
@@ -2825,7 +2880,11 @@ async function cargar_solicitudes() {
   }
 
   await actualizar_folio_preview();
-  renderizar_tickets();
+  const contador_el = document.getElementById('contador-tickets');
+  if (contador_el) contador_el.textContent = String(solicitudes.length);
+  if (!respetar_edicion || !esta_editando_en_panel()) {
+    renderizar_tickets();
+  }
   actualizar_notificaciones_ios();
 }
 
