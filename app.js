@@ -1340,13 +1340,71 @@ function inicializar_controles_visuales() {
   inicializar_eventos_reloj_circular();
 }
 
+function obtener_departamentos_ordenados_rastreo() {
+  let preferido = '';
+  try {
+    preferido = sanitizar_texto(localStorage.getItem('itp_depto_preferido') || '');
+    if (!preferido) {
+      const sesion_guardada = JSON.parse(localStorage.getItem('itp_depto_sesion_equipo') || 'null');
+      if (sesion_guardada && sesion_guardada.depto) {
+        preferido = sanitizar_texto(sesion_guardada.depto);
+      }
+    }
+  } catch (e) {}
+
+  const coincide = catalogo_departamentos_itp.find(
+    d => d.toLowerCase() === preferido.toLowerCase()
+  );
+  if (!coincide) {
+    return [...catalogo_departamentos_itp];
+  }
+  return [coincide, ...catalogo_departamentos_itp.filter(d => d !== coincide)];
+}
+
+function fijar_departamento_preferido_rastreo(depto) {
+  const limpio = sanitizar_texto(depto || '');
+  const coincide = catalogo_departamentos_itp.find(
+    d => d.toLowerCase() === limpio.toLowerCase()
+  );
+  if (!coincide) return;
+
+  try {
+    localStorage.setItem('itp_depto_preferido', coincide);
+  } catch (e) {}
+
+  const select_rastreo = document.getElementById('select-rastreo-depto');
+  if (!select_rastreo) return;
+
+  const lista_ordenada = obtener_departamentos_ordenados_rastreo();
+  select_rastreo.innerHTML = lista_ordenada
+    .map((d, i) => `<option value="${esc(d)}" ${i === 0 ? 'selected' : ''}>${esc(d)}</option>`)
+    .join('');
+
+  if (window.TomSelect) {
+    if (selector_rastreo_depto_instancia) {
+      try { selector_rastreo_depto_instancia.destroy(); } catch (e) {}
+    }
+    selector_rastreo_depto_instancia = new TomSelect(select_rastreo, {
+      create: false,
+      allowEmptyOption: false,
+      controlInput: null,
+      dropdownParent: 'body',
+      onDelete: () => false
+    });
+    selector_rastreo_depto_instancia.setValue(coincide, true);
+  } else {
+    select_rastreo.value = coincide;
+  }
+}
+
 function inicializar_selectores_departamento_consulta_y_panel() {
   if (!window.TomSelect) return;
 
   const select_rastreo = document.getElementById('select-rastreo-depto');
   if (select_rastreo) {
     select_rastreo.required = false;
-    select_rastreo.innerHTML = catalogo_departamentos_itp
+    const lista_ordenada = obtener_departamentos_ordenados_rastreo();
+    select_rastreo.innerHTML = lista_ordenada
       .map((d, i) => `<option value="${esc(d)}" ${i === 0 ? 'selected' : ''}>${esc(d)}</option>`)
       .join('');
     if (selector_rastreo_depto_instancia) {
@@ -1359,7 +1417,7 @@ function inicializar_selectores_departamento_consulta_y_panel() {
       dropdownParent: 'body',
       onDelete: () => false
     });
-    selector_rastreo_depto_instancia.setValue(catalogo_departamentos_itp[0], true);
+    selector_rastreo_depto_instancia.setValue(lista_ordenada[0], true);
   }
 
   const filtro_panel = document.getElementById('filtro-departamento-panel');
@@ -1898,10 +1956,10 @@ async function cerrar_sesion_admin() {
 // =========================================================================
 // administración de pines por departamento (solo panel interno autenticado)
 // =========================================================================
-function generar_codigo_pin_seguro(longitud = 6) {
+function generar_codigo_pin_seguro(longitud = 4) {
   const digitos = '0123456789';
   const limite_sin_sesgo = 250; // múltiplo de 10 para evitar sesgo de módulo
-  const largo = Math.max(6, Math.min(12, Number(longitud) || 6));
+  const largo = Math.max(4, Math.min(12, Number(longitud) || 4));
   const buffer = new Uint8Array(16);
   let pin = '';
   while (pin.length < largo) {
@@ -1924,7 +1982,7 @@ function generar_codigo_pin_seguro(longitud = 6) {
 }
 
 function generar_codigo_pin_4() {
-  return generar_codigo_pin_seguro(6);
+  return generar_codigo_pin_seguro(4);
 }
 
 async function abrir_modal_pines_deptos() {
@@ -2399,6 +2457,7 @@ async function cargar_y_mostrar_solicitudes_departamento(depto, pin, silencioso,
     // si ya tenemos token opaco de servidor, no conservamos el pin ni siquiera en memoria
     consulta_pin_actual = token_resultante ? '' : (pin || '');
     solicitudes_depto_publico = lista_res || [];
+    fijar_departamento_preferido_rastreo(depto);
 
     if (!silencioso) {
       try {
